@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "803443140586",
+    "project_id": "life-partner-d3363",
+    "storage_bucket": "life-partner-d3363.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803443140586:android:78f1204fa984e8ae7af493",
+        "android_client_info": {
+          "package_name": "com.example.lifepartner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR54a2QpbiTFLmjil_tsIhMEKx4th2ZVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

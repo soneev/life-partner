@@ -110,12 +110,63 @@ class SignUpScreen extends StatelessWidget {
                     // validator: (id) =>
                     //     controller.validateCompanyId(id)
                   ),
+                  CustomTextAbhaya('Gender',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontheight: 1.60,
+                      color: AppColors.black),
+                  Consumer<SignUpProvider>(builder: (context, provider, child) {
+                    return Column(
+                      children: [
+                        RadioListTile(
+                          activeColor: AppColors.primaryColor,
+                          title: CustomText('Male'),
+                          value: 'Male',
+                          groupValue: provider.selectedGender,
+                          onChanged: (value) {
+                            staticProvider.setGender(value!);
+                          },
+                        ),
+                        RadioListTile(
+                          activeColor: AppColors.primaryColor,
+                          title: CustomText('Female'),
+                          value: 'Female',
+                          groupValue: provider.selectedGender,
+                          onChanged: (value) {
+                            staticProvider.setGender(value!);
+                          },
+                        )
+                      ],
+                    );
+                  }),
+                  CustomTextAbhaya('Address',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontheight: 1.18,
+                      color: AppColors.black),
+                  CustomTextField(
+                    // isThisFieldRequired: true,
+                    controller: staticProvider.addressController,
+                    hint: "house,place,etc...",
+                    // onOnce: (String value) =>
+                    //     controller.validateCompanyId(value)
+                    // validator: (id) =>
+                    //     controller.validateCompanyId(id)
+                  ),
                   SizedBox(
                     height: 20.h,
                   ),
                   CustomButton(
                     color: AppColors.primaryColor,
                     onPressed: () {
+                      staticProvider.signUpUser(
+                          email: staticProvider.emailController.text,
+                          password: staticProvider.passWordController.text,
+                          username: staticProvider.nameController.text,
+                          phoneNumber:
+                              staticProvider.phoneNumberController.text,
+                          address: staticProvider.addressController.text,
+                          gender: staticProvider.selectedGender);
                       // Get.toNamed(AppRoute.landing);
                     },
                     text: "Sign Up",

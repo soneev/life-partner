@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lifepartner/utils/colors/app_colors.dart';
+import 'package:lifepartner/view/favorite/favorite_screen.dart';
 import 'package:lifepartner/view/home_page/home_page.dart';
 import 'package:lifepartner/view/landing_page/landing_page_provider.dart';
+import 'package:lifepartner/view/maches/all_profiles_screen.dart';
+import 'package:lifepartner/view/my_profile/my_profile_screen.dart';
 import 'package:lifepartner/widgets/custom_images.dart';
 import 'package:provider/provider.dart';
 
@@ -68,15 +71,15 @@ class LandingScreen extends StatelessWidget {
                   icon: Container(
                       margin: const EdgeInsets.only(bottom: 2),
                       child: CustomPngImage(
-                        imageName: "message",
-                        height: 40,
-                        width: 40,
+                        imageName: "category",
+                        height: 30,
+                        width: 30,
                         color: value.tabIndex == 2
                             ? AppColors.primaryColor
                             : AppColors.grey,
                         boxFit: BoxFit.cover,
                       )),
-                  label: 'chat',
+                  label: 'Category',
                 ),
                 BottomNavigationBarItem(
                   icon: Container(
@@ -132,18 +135,11 @@ class LandingScreen extends StatelessWidget {
           body: Consumer<LandingProvider>(builder: (context, provider, child) {
             return IndexedStack(
               index: provider.tabIndex,
-              children: [
+              children: const [
                 HomePageScreen(),
-                Container(),
-                Container(),
-                Container()
-                // const MyTask(),
-                // const MenuScreen(),
-                // Container(),
-                // const QuickNotes(),
-
-                // const ProfileScreen()
-                ,
+                FavoriteScreen(),
+                AllProfilesScreen(),
+                MyProfileScreen()
               ],
             );
           })),

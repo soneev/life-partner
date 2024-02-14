@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lifepartner/utils/app_route/route_name.dart';
 import 'package:lifepartner/utils/colors/app_colors.dart';
+import 'package:lifepartner/view/home_page/homepage_provider.dart';
 import 'package:lifepartner/view/login/login_provider.dart';
 import 'package:lifepartner/view/sign_up/sign_up_provider.dart';
 import 'package:lifepartner/widgets/custom_button.dart';
@@ -92,7 +93,11 @@ class LoginScreen extends StatelessWidget {
                   CustomButton(
                     color: AppColors.primaryColor,
                     onPressed: () {
-                      Get.toNamed(AppRoute.landing);
+                      staticProvider.userLogin(
+                          email: staticProvider.emailController.text,
+                          password: staticProvider.passWordController.text);
+                      // if (staticProvider.dbUser != null) {}
+                      // staticProvider.createItem();
                     },
                     text: "Login",
                     textColor: AppColors.white,
@@ -107,6 +112,10 @@ class LoginScreen extends StatelessWidget {
                       TextButton(
                           onPressed: () {
                             Get.toNamed(AppRoute.signUp);
+                            // staticProvider.retrieveData();
+                            // print(staticProvider.userdata.length.toString());
+
+                            // staticProvider.deleteAllItems();
                           },
                           child: CustomText(
                             "SignUp",
