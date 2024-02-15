@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {
@@ -10,7 +12,7 @@ class FirebaseAuthService {
 
       return credential.user;
     } catch (e) {
-      print("some errorr");
+      log("some errorr");
 
       e.toString();
     }
@@ -23,10 +25,12 @@ class FirebaseAuthService {
           email: email, password: password);
       return credential.user;
     } catch (e) {
-      print("some errorr");
+      log("some errorr");
 
       e.toString();
     }
     return null;
   }
+
+  User? user;
 }

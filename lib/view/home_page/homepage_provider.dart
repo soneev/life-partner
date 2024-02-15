@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:lifepartner/di_container/di_container.dart';
 import 'package:lifepartner/model/hive_model/users_data_model.dart';
@@ -7,11 +9,12 @@ import 'package:lifepartner/view/splash/splash_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomePageProvider extends ChangeNotifier {
-  // HomePageProvider() {
-  //   setInitialUsers();
-  //   // fetchDataFromHive();
-  // }
   List<UserData> usersList = [];
+
+  bool isLoading = true;
+  void setLoader(bool value) {
+    isLoading = value;
+  }
 
   UserData? loginedUser;
   void setInitialUsers(BuildContext context) {
@@ -21,21 +24,24 @@ class HomePageProvider extends ChangeNotifier {
       loginedUser = splashProvider.dbUser;
       if (loginedUser != null) {
         fetchDataFromHive();
+        setLoader(false);
       } else {
         loginedUser = loginProvider.dbUser;
         if (loginedUser != null) {
           fetchDataFromHive();
+          setLoader(false);
         }
       }
     }
-    print(loginedUser.toString());
+
+    log(loginedUser.toString());
   }
 
   fetchDataFromHive() {
     final userDataService = locator<UserDataService>();
 
     List<UserData> users = userDataService.getUsers();
-    print(users.length);
+    log(users.length.toString());
 
     List<UserData> filteredUsers =
         users.where((user) => user.gender != loginedUser!.gender).toList();

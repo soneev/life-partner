@@ -10,7 +10,6 @@ class AppColors {
   //gradient
   static const Color darkPrimary = Color(0xffE61010);
   static const Color lightPrimary = Color(0xffF39CCF);
-  static const Color screenBg = Color(0xFFFDD0);
 
   // static const secondaryColor = Color(0xffF37413);
   static const lightSecondary = Color(0xffF38701);

@@ -21,4 +21,19 @@ class UserData {
       required this.imageUrl,
       required this.description,
       this.phoneNumber});
+
+  @override
+  String toString() {
+    return 'UserData{'
+        'username: $username, '
+        'age: $age, '
+        'address: $address, '
+        'gender: $gender, '
+        'height: $height, '
+        'weight: $weight, '
+        'email: $email, '
+        'imageUrl: $imageUrl, '
+        'description: $description, '
+        'phoneNumber: $phoneNumber}';
+  }
 }

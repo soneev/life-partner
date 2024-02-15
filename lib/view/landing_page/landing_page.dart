@@ -8,8 +8,6 @@ import 'package:lifepartner/view/my_profile/my_profile_screen.dart';
 import 'package:lifepartner/widgets/custom_images.dart';
 import 'package:provider/provider.dart';
 
-import '../login/login_provider.dart';
-
 class LandingScreen extends StatelessWidget {
   final TextStyle unselectedLabelStyle = TextStyle(
       color: Colors.white.withOpacity(0.5),
@@ -105,32 +103,6 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          // floatingActionButtonLocation:
-          //     FloatingActionButtonLocation.centerDocked,
-          // floatingActionButton: Container(
-          //   height: 90,
-          //   decoration: const BoxDecoration(boxShadow: [
-          //     BoxShadow(
-          //       color: Color(0x7fe0e0e0),
-          //       offset: Offset(5, 5),
-          //       blurRadius: 4.5,
-          //     ),
-          //   ], shape: BoxShape.circle, color: Colors.white),
-          //   padding: const EdgeInsets.all(5),
-          //   child: Container(
-          //     height: 80,
-          //     decoration: const BoxDecoration(
-          //       shape: BoxShape.circle,
-          //       color: AppColors.primaryColor,
-          //     ),
-          //     child: Center(
-          //       child: CustomSvgImage(
-          //         height: 30,
-          //         imageName: 'product',
-          //       ),
-          //     ),
-          //   ),
-          // ),
           bottomNavigationBar: buildBottomNavigationMenu(context),
           body: Consumer<LandingProvider>(builder: (context, provider, child) {
             return IndexedStack(

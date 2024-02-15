@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:lifepartner/mixins/snack_bar_mixins.dart';
+import 'package:lifepartner/utils/app_route/route_name.dart';
 import 'package:lifepartner/utils/colors/app_colors.dart';
 import 'package:lifepartner/view/sign_up/sign_up_provider.dart';
 import 'package:lifepartner/widgets/custom_button.dart';
@@ -7,7 +10,7 @@ import 'package:lifepartner/widgets/custom_text.dart';
 import 'package:lifepartner/widgets/custom_text_field.dart';
 import 'package:provider/provider.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatelessWidget with SnackbarMixin {
   const SignUpScreen({Key? key});
 
   double getSmallDiameter(BuildContext context) =>
@@ -55,12 +58,10 @@ class SignUpScreen extends StatelessWidget {
                       fontheight: 1.18,
                       color: AppColors.black),
                   CustomTextField(
-                    controller: staticProvider.nameController,
-                    hint: "Enter your full name",
-                    // isThisFieldRequired: true,
-                    // onOnce: (String value) =>
-                    //     controller.validateName(value),
-                  ),
+                      controller: staticProvider.nameController,
+                      hint: "Enter your full name",
+                      // isThisFieldRequired: true,
+                      validator: (name) => staticProvider.validateName(name)),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -75,6 +76,7 @@ class SignUpScreen extends StatelessWidget {
                     hint: "Enter your email",
                     // onOnce: (String value) =>
                     //     controller.validateEmail(value),
+                    validator: (email) => staticProvider.validateEmail(email),
                   ),
                   SizedBox(
                     height: 20.h,
@@ -85,14 +87,10 @@ class SignUpScreen extends StatelessWidget {
                       fontheight: 1.18,
                       color: AppColors.black),
                   CustomTextField(
-                    // isThisFieldRequired: true,
-                    controller: staticProvider.passWordController,
-                    hint: "Enter your password",
-                    // onOnce: (String value) =>
-                    //     controller.validateCompanyName(value)
-                    // validator: (cmp) =>
-                    //     controller.validateCompanyName(cmp)
-                  ),
+                      // isThisFieldRequired: true,
+                      controller: staticProvider.passWordController,
+                      hint: "Enter your password",
+                      validator: (psw) => staticProvider.validatePassWord(psw)),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -102,14 +100,11 @@ class SignUpScreen extends StatelessWidget {
                       fontheight: 1.18,
                       color: AppColors.black),
                   CustomTextField(
-                    // isThisFieldRequired: true,
-                    controller: staticProvider.phoneNumberController,
-                    hint: "Enter your Number",
-                    // onOnce: (String value) =>
-                    //     controller.validateCompanyId(value)
-                    // validator: (id) =>
-                    //     controller.validateCompanyId(id)
-                  ),
+                      // isThisFieldRequired: true,
+                      controller: staticProvider.phoneNumberController,
+                      hint: "Enter your Number",
+                      validator: (number) =>
+                          staticProvider.validateMobile(number!)),
                   CustomTextAbhaya('Gender',
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
@@ -145,29 +140,30 @@ class SignUpScreen extends StatelessWidget {
                       fontheight: 1.18,
                       color: AppColors.black),
                   CustomTextField(
-                    // isThisFieldRequired: true,
-                    controller: staticProvider.addressController,
-                    hint: "house,place,etc...",
-                    // onOnce: (String value) =>
-                    //     controller.validateCompanyId(value)
-                    // validator: (id) =>
-                    //     controller.validateCompanyId(id)
-                  ),
+                      // isThisFieldRequired: true,
+                      controller: staticProvider.addressController,
+                      hint: "house,place,etc...",
+                      validator: (adr) => staticProvider.validateAddress(adr)),
                   SizedBox(
                     height: 20.h,
                   ),
                   CustomButton(
                     color: AppColors.primaryColor,
                     onPressed: () {
-                      staticProvider.signUpUser(
-                          email: staticProvider.emailController.text,
-                          password: staticProvider.passWordController.text,
-                          username: staticProvider.nameController.text,
-                          phoneNumber:
-                              staticProvider.phoneNumberController.text,
-                          address: staticProvider.addressController.text,
-                          gender: staticProvider.selectedGender);
-                      // Get.toNamed(AppRoute.landing);
+                      if (formKey.currentState!.validate() ?? false) {
+                        staticProvider.signUpUser(
+                            email: staticProvider.emailController.text,
+                            password: staticProvider.passWordController.text,
+                            username: staticProvider.nameController.text,
+                            phoneNumber:
+                                staticProvider.phoneNumberController.text,
+                            address: staticProvider.addressController.text,
+                            gender: staticProvider.selectedGender);
+                        Get.toNamed(AppRoute.login);
+                      } else {
+                        showErrorSnackbar(context,
+                            title: "Error", message: "Signup failed");
+                      }
                     },
                     text: "Sign Up",
                     textColor: AppColors.white,

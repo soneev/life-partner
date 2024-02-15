@@ -4,6 +4,7 @@ import 'package:lifepartner/view/landing_page/landing_page.dart';
 import 'package:lifepartner/view/login/login_screen.dart';
 import 'package:lifepartner/view/sign_up/sign_up_screen.dart';
 import 'package:lifepartner/view/splash/splash_screen.dart';
+import 'package:lifepartner/view/update_profile/update_profle.dart';
 
 import 'route_name.dart';
 
@@ -30,5 +31,9 @@ appRoutes() => [
       GetPage(
         name: AppRoute.detail,
         page: () => const DetailScreen(),
+      ),
+      GetPage(
+        name: AppRoute.update,
+        page: () => const UpdateProfile(),
       ),
     ];

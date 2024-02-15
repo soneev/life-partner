@@ -139,21 +139,6 @@ class DetailScreen extends StatelessWidget {
                 )
               ],
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(5.0),
-            //   child: Align(
-            //     alignment: Alignment.topRight,
-            //     child: GestureDetector(
-            //       onTap: () {},
-            //       child: const Icon(
-            //         Icons.favorite,
-            //         color: Colors.red,
-            //         size: 40,
-            //       ),
-            //     ),
-            //   ),
-            // )
-
             Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Row(

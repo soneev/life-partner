@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:hive/hive.dart';
 import 'package:lifepartner/di_container/di_container.dart';
 import 'package:lifepartner/model/hive_model/users_data_model.dart';
@@ -43,13 +46,13 @@ class SignUpProvider extends ChangeNotifier {
             address: address,
             gender: gender,
             phone: phoneNumber);
-        print("User signed up successfully: ${user.uid}");
+        log("User signed up successfully: ${user.uid}");
       } else {
-        print("Sign-up failed");
+        log("Sign-up failed");
       }
     } catch (e) {
       // Handle any exceptions
-      print("Error during sign-up: $e");
+      log("Error during sign-up: $e");
     }
   }
 
@@ -82,5 +85,46 @@ class SignUpProvider extends ChangeNotifier {
       'description': dbuser.description,
     };
     userDataDB.add(userDataMap);
+  }
+
+  validateName(String? name) {
+    if (name!.isEmpty) {
+      return 'Name required';
+    }
+
+    return null;
+  }
+
+  validateEmail(String? email) {
+    if (!GetUtils.isEmail(email ?? "")) {
+      return "Email is not valid";
+    }
+    return null;
+  }
+
+  validatePassWord(String? pwd) {
+    if (!GetUtils.isLengthGreaterOrEqual(pwd, 6)) {
+      return "password required 6 character";
+    }
+    return null;
+  }
+
+  String? validateMobile(String value) {
+    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp regExp = RegExp(pattern);
+    if (value.length == 0) {
+      return 'Please enter mobile number';
+    } else if (!regExp.hasMatch(value)) {
+      return 'Please enter valid mobile number';
+    }
+    return null;
+  }
+
+  validateAddress(String? address) {
+    if (address!.isEmpty) {
+      return 'Address required';
+    }
+
+    return null;
   }
 }

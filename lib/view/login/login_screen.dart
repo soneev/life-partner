@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lifepartner/mixins/snack_bar_mixins.dart';
 import 'package:lifepartner/utils/app_route/route_name.dart';
 import 'package:lifepartner/utils/colors/app_colors.dart';
-import 'package:lifepartner/view/home_page/homepage_provider.dart';
+
 import 'package:lifepartner/view/login/login_provider.dart';
-import 'package:lifepartner/view/sign_up/sign_up_provider.dart';
+
 import 'package:lifepartner/widgets/custom_button.dart';
 import 'package:lifepartner/widgets/custom_text.dart';
 import 'package:lifepartner/widgets/custom_text_field.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatelessWidget with SnackbarMixin {
   const LoginScreen({Key? key});
 
   double getSmallDiameter(BuildContext context) =>
@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: Form(
-              // key: formKey,
+              key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -64,11 +64,9 @@ class LoginScreen extends StatelessWidget {
                       fontheight: 1.18,
                       color: AppColors.black),
                   CustomTextField(
-                    // isThisFieldRequired: true,
                     controller: staticProvider.emailController,
                     hint: "Enter your email",
-                    // onOnce: (String value) =>
-                    //     controller.validateEmail(value),
+                    validator: (email) => staticProvider.validateEmail(email),
                   ),
                   SizedBox(
                     height: 20.h,
@@ -79,13 +77,9 @@ class LoginScreen extends StatelessWidget {
                       fontheight: 1.18,
                       color: AppColors.black),
                   CustomTextField(
-                    // isThisFieldRequired: true,
                     controller: staticProvider.passWordController,
                     hint: "Enter your password",
-                    // onOnce: (String value) =>
-                    //     controller.validateCompanyName(value)
-                    // validator: (cmp) =>
-                    //     controller.validateCompanyName(cmp)
+                    validator: (pswd) => staticProvider.validatePassWord(pswd),
                   ),
                   SizedBox(
                     height: 50.h,
@@ -93,11 +87,14 @@ class LoginScreen extends StatelessWidget {
                   CustomButton(
                     color: AppColors.primaryColor,
                     onPressed: () {
-                      staticProvider.userLogin(
-                          email: staticProvider.emailController.text,
-                          password: staticProvider.passWordController.text);
-                      // if (staticProvider.dbUser != null) {}
-                      // staticProvider.createItem();
+                      if (formKey.currentState!.validate() ?? false) {
+                        staticProvider.userLogin(
+                            email: staticProvider.emailController.text,
+                            password: staticProvider.passWordController.text);
+                      } else {
+                        showErrorSnackbar(context,
+                            title: "Error", message: "login failed");
+                      }
                     },
                     text: "Login",
                     textColor: AppColors.white,

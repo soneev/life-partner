@@ -18,17 +18,14 @@ class SplashProvider extends ChangeNotifier {
   checkLogin() {
     Future.delayed(const Duration(seconds: 4), () {
       user = FirebaseAuth.instance.authStateChanges().listen((user) async {
-        print(user.toString());
+        log(user.toString());
         if (user == null) {
-          print('User is currently signed out!');
+          log('User is currently signed out!');
 
           Get.toNamed(AppRoute.login);
         } else {
           getuserDb(user.email.toString());
-          log("time lastlogin----->${user.metadata.lastSignInTime!.microsecondsSinceEpoch}"
-              .toString());
-          log("time creation----->${user.metadata.creationTime!.microsecondsSinceEpoch}"
-              .toString());
+
           log('User is signed in!');
           Get.toNamed(AppRoute.landing);
         }
@@ -43,8 +40,6 @@ class SplashProvider extends ChangeNotifier {
     List<UserData> usersList = userDataService.getUsers();
     try {
       dbUser = usersList.firstWhere((dbuser) => dbuser.email == loginEmail);
-
-      print(dbUser.toString());
     } catch (e) {
       log(e.toString());
     }
