@@ -22,7 +22,7 @@ Make sure you have the following installed:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/your-flutter-project.git
+    git clone https://github.com/soneev/life-partner.git
     ```
 
 2. Open the project in VS Code:
