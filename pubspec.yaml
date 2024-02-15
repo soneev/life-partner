@@ -51,6 +51,7 @@ dependencies:
   image_picker: ^1.0.7
   intl: ^0.19.0
   another_flushbar: ^1.12.30
+  badges: ^3.1.2
   
 
 dev_dependencies:

@@ -1,16 +1,60 @@
 # lifepartner
 
-A new Flutter project.
+Life partner
+
+its matrimony app created by flutter sdk  
+features:
+1.Authentication -bride and groom  register and login  impplemented by firebase auth and hive localDb
+2.services: services handled by getit package 
+3.user can login edit profile data view profiles and liked profiles will categoriesed
+
+
+## Prerequisites
+
+Make sure you have the following installed:
+
+- Flutter SDK (version 3.13.6)
+- Dart SDK
+- Visual Studio Code (VS Code)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Clone the repository:
 
-A few resources to get you started if this is your first Flutter project:
+    ```bash
+    git clone https://github.com/your-username/your-flutter-project.git
+    ```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. Open the project in VS Code:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    ```bash
+    cd your-flutter-project
+    code .
+    ```
+
+3. Install dependencies:
+
+    ```bash
+    flutter pub get
+    ```
+
+## Running the App
+
+Ensure that an emulator or a physical device is connected.
+
+1. Open a terminal in VS Code.
+
+2. Run the app:
+
+    ```bash
+    flutter run
+    ```
+
+This will launch the app on the connected device.
+
+## Building the App
+
+To build the app for production:
+
+```bash
+flutter build apk

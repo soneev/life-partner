@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifepartner/utils/colors/app_colors.dart';
+import 'package:lifepartner/view/favorite/favorite_provider.dart';
 import 'package:lifepartner/view/favorite/favorite_screen.dart';
 import 'package:lifepartner/view/home_page/home_page.dart';
 import 'package:lifepartner/view/landing_page/landing_page_provider.dart';
@@ -7,6 +8,7 @@ import 'package:lifepartner/view/maches/all_profiles_screen.dart';
 import 'package:lifepartner/view/my_profile/my_profile_screen.dart';
 import 'package:lifepartner/widgets/custom_images.dart';
 import 'package:provider/provider.dart';
+import 'package:badges/badges.dart' as badges;
 
 class LandingScreen extends StatelessWidget {
   final TextStyle unselectedLabelStyle = TextStyle(
@@ -56,13 +58,26 @@ class LandingScreen extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: Container(
                       margin: const EdgeInsets.only(bottom: 7),
-                      child: Icon(
-                        Icons.favorite,
-                        size: 30,
-                        color: value.tabIndex == 1
-                            ? AppColors.primaryColor
-                            : AppColors.grey,
-                      )),
+                      child: Consumer<FavoriteProvider>(
+                          builder: (context, favprovider, child) {
+                        return badges.Badge(
+                          showBadge:
+                              favprovider.favoriteitem.isEmpty ? false : true,
+                          badgeContent: Text(
+                            favprovider.favcount.toString(),
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          badgeStyle:
+                              const badges.BadgeStyle(badgeColor: Colors.green),
+                          child: Icon(
+                            Icons.favorite,
+                            size: 30,
+                            color: value.tabIndex == 1
+                                ? AppColors.primaryColor
+                                : AppColors.grey,
+                          ),
+                        );
+                      })),
                   label: 'Favorite',
                 ),
                 BottomNavigationBarItem(
